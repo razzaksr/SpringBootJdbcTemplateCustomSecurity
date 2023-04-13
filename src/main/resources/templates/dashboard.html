@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script>
+        $(document).ready(()=>{
+            $("#out").click(()=>{
+                $.post("/logout",(data)=>{
+                    alert("logged out");
+                    window.location.assign("/")
+                })
+            })
+            $("table").mouseenter(()=>{
+                $.get("http://localhost:8082/hai/",(data)=>{
+                    //var vary=JSON.parse(data);
+                    data.map((v)=>{
+                        $("#result").append(
+                            "<tr><td>"+v.id+"</td><td>"+v.name+"</td><td>"+v.price+"</td></tr>");
+                    })
+                })
+            })
+            $("table").mouseleave(()=>{
+                $("#result").html("");
+            })
+        })
+    </script>
+</head>
+<body>
+<h2>Hello World!</h2>
+<button id="out">Logout</button>
+<table>
+    <thead>
+        <tr>
+            <th>Id</th><th>Name</th><th>Price</th>
+        </tr>
+    </thead>
+    <tbody id="result">
+
+    </tbody>
+</table>
+</body>
+</html>
